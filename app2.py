@@ -1,9 +1,7 @@
+
+
 import streamlit as st
 import pandas as pd
-import pygame
-
-# إعداد pygame
-pygame.mixer.init()
 
 # تغيير الخلفية إلى اللون الأسود باستخدام CSS
 st.markdown(
@@ -19,12 +17,6 @@ st.markdown(
         color: white; /* لون النص */
         min-height: 100vh; /* ضمان تغطية الشاشة بالكامل */
     }
-    .music-icon {
-        cursor: pointer; /* تغيير المؤشر عند المرور فوق الأيقونة */
-        width: 30px; /* عرض الأيقونة */
-        height: auto; /* الحفاظ على نسبة الطول إلى العرض */
-        background: transparent; /* خلفية شفافة */
-    }
     </style>
     """,
     unsafe_allow_html=True
@@ -36,15 +28,6 @@ st.title('Enhanced Streamlit App')
 # عنوان التطبيق الجديد
 st.markdown("<h2 style='color: lightblue;'>Climate Change Awareness Hub</h2>", unsafe_allow_html=True)
 
-# تشغيل الموسيقى تلقائيًا
-audio_file = 'assets/sherenmusic.mp3' 
-pygame.mixer.music.load(audio_file)
-pygame.mixer.music.play(-1)  # تشغيل الموسيقى بشكل متكرر
-
-# متغير للتحكم في حالة الموسيقى
-if 'music_playing' not in st.session_state:
-    st.session_state.music_playing = True
-
 # عرض الصورة الثلاثية الأبعاد الأول
 st.components.v1.html(
     """
@@ -53,15 +36,6 @@ st.components.v1.html(
     """,
     height=600
 )
-
-# زر أيقونة الموسيقى تحت الصورة الثلاثية
-if st.button("🎵", key="music_button"):  # أيقونة الموسيقى
-    if st.session_state.music_playing:
-        pygame.mixer.music.pause()  # إيقاف الموسيقى
-        st.session_state.music_playing = False
-    else:
-        pygame.mixer.music.unpause()  # تشغيل الموسيقى
-        st.session_state.music_playing = True
 
 # عرض النص الترحيبي
 st.write('Welcome to the Climate Change Awareness Hub! Explore the impact of climate change and how we can make a difference.')
